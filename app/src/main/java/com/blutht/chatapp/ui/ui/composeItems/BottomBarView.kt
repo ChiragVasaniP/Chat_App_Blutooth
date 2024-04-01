@@ -70,12 +70,12 @@ fun BottomBarView(navController: NavController) {
                     selectedIconColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 onClick = {
-  /*                  navController.navigate(tabBarItem.tabId) {
+                    navController.navigate(tabBarItem.tabId) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         launchSingleTop = true
-                    }*/
+                    }
 
 
                 },

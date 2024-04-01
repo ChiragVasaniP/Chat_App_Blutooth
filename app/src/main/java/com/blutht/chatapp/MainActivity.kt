@@ -1,8 +1,10 @@
 package com.blutht.chatapp
 
+import android.bluetooth.BluetoothDevice
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -38,15 +40,52 @@ import com.blutht.chatapp.ui.ui.composeItems.UserChatViewTopViewHome
 import com.blutht.chatapp.ui.ui.composeItems.chat.SearchBar
 import com.blutht.chatapp.ui.ui.composeItems.chat.SendMessageBox
 import com.blutht.chatapp.ui.ui.composeItems.chat.UserChatTopBar
+import com.blutht.chatapp.utils.BluetoothManager
+import com.blutht.chatapp.utils.BluetoothManagerCallback
+import com.blutht.chatapp.utils.getPermissionList
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), BluetoothManagerCallback {
+
+    private lateinit var bluetoothManager: BluetoothManager
+
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        )
+        { permissions ->
+            // Handle Permission granted/rejected
+            val isGranted = permissions.all { it.value }
+            if (isGranted) {
+                bluetoothManager.enableBluetooth()
+            } else {
+
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bluetoothManager = BluetoothManager(this, this)
+        bluetoothManager.enableBluetooth()
         setContent {
             ChatAppTheme {
                 Main(rememberNavController())
             }
         }
+    }
+
+    override fun onBluetoothEnabled() {
+    }
+
+    override fun onBluetoothEnableFailed() {
+    }
+
+    override fun onPermissionGranted() {
+    }
+
+    override fun onPermissionDenied() {
+        activityResultLauncher.launch(getPermissionList().toTypedArray())
+    }
+
+    override fun onBluetoothDevicesFound(devices: List<BluetoothDevice>) {
     }
 }
 

@@ -36,6 +36,8 @@ import com.blutht.chatapp.ui.ui.screens.chat.dummyChats
 
 @Composable
 fun ChatListItem(message: ChatsMessage, navController: NavHostController) {
+
+
     ConstraintLayout(
         modifier = Modifier
             .clickable { navController.navigate(Screens.Messages.route) }
