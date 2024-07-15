@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat
 
 private var storagePermissions = mutableListOf(
     android.Manifest.permission.BLUETOOTH,
+    android.Manifest.permission.READ_CONTACTS,
     android.Manifest.permission.ACCESS_COARSE_LOCATION,
     android.Manifest.permission.ACCESS_FINE_LOCATION,
     android.Manifest.permission.BLUETOOTH_ADMIN
@@ -16,6 +17,7 @@ private var storagePermissions = mutableListOf(
 @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
 private var storagePermission33 = mutableListOf(
     android.Manifest.permission.BLUETOOTH,
+    android.Manifest.permission.READ_CONTACTS,
     android.Manifest.permission.BLUETOOTH_SCAN,
     android.Manifest.permission.BLUETOOTH_ADVERTISE,
     android.Manifest.permission.ACCESS_COARSE_LOCATION,
